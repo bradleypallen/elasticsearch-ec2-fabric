@@ -146,7 +146,7 @@ def find_server(conn, ec2InstanceName):
     instances = [i for r in reservations for i in r.instances]
     for instance in instances:
         tags = instance.__dict__['tags']
-        if ec2InstanceName == tags['Name'] and instance.state != u'terminated' and instance.state != u'shutting-down':
+        if tags.has_key('Name') and ec2InstanceName == tags['Name'] and instance.state != u'terminated' and instance.state != u'shutting-down':
             newinstance = instance
             break
     
